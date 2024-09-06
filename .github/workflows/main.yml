@@ -1,13 +1,15 @@
 name: Node.js CI
 
 env:
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORGID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJID }}
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 on:
   push:
-    branches: [ "main" ]
+    branches:  
+      - main 
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
   test:
@@ -30,7 +32,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install Vercel CLI
-        run: npm install -g vercel
+        run: npm install -g vercel@latest
       - name: Vercel pull
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
       - name: Build Project
